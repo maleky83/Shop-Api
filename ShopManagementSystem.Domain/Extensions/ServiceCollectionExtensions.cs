@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using ShopManagementSystem.Domain.Entities.Identity;
+using ShopManagementSystem.Domain.Entities;
 
 namespace ShopManagementSystem.Domain.Extensions;
 

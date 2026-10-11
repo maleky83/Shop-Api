@@ -3,17 +3,18 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using ShopManagementSystem.Application.Orders.Dtos;
 using ShopManagementSystem.Domain.Entities.Orders;
+using ShopManagementSystem.Domain.Exceptions;
 using ShopManagementSystem.Domain.Repositories.Shopping;
 
 namespace ShopManagementSystem.Application.Orders.Queries.GetOrderbyId;
 
-internal class GetOrderbyIdQueryHandler(
+public class GetOrderbyIdQueryHandler(
         ILogger<GetOrderbyIdQueryHandler> logger,
         IOrderRepository orderRepository,
         IMapper mapper
-    ) : IRequestHandler<GetOrderbyIdQuery, OrderDto?>
+    ) : IRequestHandler<GetOrderbyIdQuery, OrderDto>
 {
-    public async Task<OrderDto?> Handle(
+    public async Task<OrderDto> Handle(
         GetOrderbyIdQuery request,
         CancellationToken cancellationToken)
     {
@@ -21,7 +22,8 @@ internal class GetOrderbyIdQueryHandler(
             "Getting order {OrderId} for user {UserId}",
             request.OrderId, request.UserId);
 
-        Order order = await orderRepository.GetByIdAsync(request.UserId, request.OrderId);
+        Order order = await orderRepository.GetByIdAsync(request.UserId, request.OrderId)
+            ?? throw new NotFoundException(nameof(Order), request.OrderId.ToString());
 
         OrderDto orderDto = mapper.Map<OrderDto>(order);
 

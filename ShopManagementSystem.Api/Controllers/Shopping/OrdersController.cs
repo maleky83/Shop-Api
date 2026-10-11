@@ -9,13 +9,13 @@ using ShopManagementSystem.Application.Orders.Queries.GetOrderbyId;
 namespace ShopManagementSystem.Api.Controllers.Shopping;
 
 [ApiController]
-[Route("orders")]
+[Route("api/orders")]
 public sealed class OrdersController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrders()
     {
-        Guid userId = GetUserId();
+        var userId = GetUserId();
 
         IEnumerable<OrderDto> orderDtos = await mediator.Send(new GetAllOrdersQuery(userId));
 
@@ -25,14 +25,9 @@ public sealed class OrdersController(IMediator mediator) : ControllerBase
     [HttpGet("{orderId}")]
     public async Task<ActionResult<OrderDto>> GetOrder(Guid orderId)
     {
-        Guid userId = GetUserId();
+        var userId = GetUserId();
 
-        OrderDto? order = await mediator.Send(new GetOrderbyIdQuery(userId, orderId));
-
-        if (order is null)
-        {
-            return NotFound();
-        }
+        OrderDto order = await mediator.Send(new GetOrderbyIdQuery(userId, orderId));
 
         return Ok(order);
     }
@@ -40,22 +35,22 @@ public sealed class OrdersController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CreateOrder(CreateOrderCommand command)
     {
-        Guid userId = GetUserId();
+        var userId = GetUserId();
 
         Guid id = await mediator.Send(command);
 
         return CreatedAtAction(nameof(GetOrder), new { id });
     }
 
-    private Guid GetUserId()
+    private string GetUserId()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (userId is null)
+        if (string.IsNullOrWhiteSpace(userId))
         {
-            throw new UnauthorizedAccessException("User invalid");
+            throw new UnauthorizedAccessException("Invalid user");
         }
 
-        return Guid.Parse(userId);
+        return userId;
     }
 }

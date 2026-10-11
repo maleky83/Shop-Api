@@ -8,32 +8,27 @@ using ShopManagementSystem.Application.Carts.Queries.GetCartById;
 namespace ShopManagementSystem.Api.Controllers.Shopping;
 
 [ApiController]
-[Route("carts")]
+[Route("api/carts")]
 public class CartsController(IMediator mediator) : ControllerBase
 {
-    private Guid GetUserId()
+    private string GetUserId()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (userId == null)
+        if (string.IsNullOrWhiteSpace(userId))
         {
             throw new UnauthorizedAccessException("Invalid user");
         }
 
-        return Guid.Parse(userId);
+        return userId;
     }
 
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<CartDto>> GetCart()
     {
-        Guid userId = GetUserId();
+        var userId = GetUserId();
 
         CartDto? cart = await mediator.Send(new GetCartByIdQuery(userId));
-
-        if (cart is null)
-            return NotFound();
 
         return Ok(cart);
     }
@@ -43,13 +38,10 @@ public class CartsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> DeleteCart()
     {
-        Guid userId = GetUserId();
+        var userId = GetUserId();
 
-        var isDeleted = await mediator.Send(new DeleteCartCommand(userId));
+        await mediator.Send(new DeleteCartCommand(userId));
 
-        if (isDeleted)
-            return NoContent();
-
-        return NotFound();
+        return NoContent();
     }
 }

@@ -13,16 +13,16 @@ public sealed class CartItemsController(
     IMediator mediator
     ) : ControllerBase
 {
-    private Guid GetUserId()
+    private string GetUserId()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (userId == null)
+        if (string.IsNullOrWhiteSpace(userId))
         {
             throw new UnauthorizedAccessException("Invalid user");
         }
 
-        return Guid.Parse(userId);
+        return userId;
     }
 
     [HttpPost]
@@ -31,7 +31,7 @@ public sealed class CartItemsController(
     public async Task<ActionResult> CreateCartItem(
         [FromBody] CreateCartItemCommand command)
     {
-        Guid userId = GetUserId();
+        var userId = GetUserId();
 
         command.UserId = userId;
 
@@ -50,17 +50,14 @@ public sealed class CartItemsController(
        [FromRoute] Guid cartItemId,
        [FromBody] UpdateCartItemCommand command)
     {
-        Guid userId = GetUserId();
+        var userId = GetUserId();
 
         command.UserId = userId;
         command.CartItemId = cartItemId;
 
-        var isUpdated = await mediator.Send(command);
+        await mediator.Send(command);
 
-        if (isUpdated)
-            return NoContent();
-
-        return NotFound();
+        return NoContent();
     }
 
     [HttpDelete("{cartItemId}")]
@@ -70,16 +67,13 @@ public sealed class CartItemsController(
         [FromRoute] Guid cartItemId,
         [FromBody] DeleteCartItemCommand command)
     {
-        Guid userId = GetUserId();
+        var userId = GetUserId();
 
         command.UserId = userId;
         command.CartItemId = cartItemId;
 
-        var isDeleted = await mediator.Send(command);
+        await mediator.Send(command);
 
-        if (isDeleted)
-            return NoContent();
-
-        return NotFound();
+        return NoContent();
     }
 }

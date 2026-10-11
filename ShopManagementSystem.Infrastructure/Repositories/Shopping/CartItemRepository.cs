@@ -26,7 +26,7 @@ internal class CartItemRepository(ApplicationDbContext dbContext) : ICartItemRep
         return cartItem;
     }
 
-    public async Task AddAsync(Guid userId, CartItem entity)
+    public async Task AddAsync(string userId, CartItem entity)
     {
         Cart? cart = await dbContext.Carts
             .Include(c => c.CartItems)

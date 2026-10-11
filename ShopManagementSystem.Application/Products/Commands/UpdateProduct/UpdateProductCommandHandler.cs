@@ -3,6 +3,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using ShopManagementSystem.Domain.Entities.Catalog;
+using ShopManagementSystem.Domain.Exceptions;
 using ShopManagementSystem.Domain.Repositories;
 
 namespace ShopManagementSystem.Application.Products.Commands.UpdateProduct;
@@ -12,9 +13,9 @@ public class UpdateProductCommandHandler(
     IMapper mapper,
     IProductRepository productRepository,
     IValidator<UpdateProductCommand> validator
-    ) : IRequestHandler<UpdateProductCommand, bool>
+    ) : IRequestHandler<UpdateProductCommand>
 {
-    public async Task<bool> Handle(
+    public async Task Handle(
         UpdateProductCommand request,
         CancellationToken cancellationToken)
     {
@@ -22,14 +23,11 @@ public class UpdateProductCommandHandler(
 
         await validator.ValidateAndThrowAsync(request, cancellationToken);
 
-        Product? product = await productRepository.GetByIdAsync(request.Id);
-
-        if (product is null)
-            return false;
+        Product? product = await productRepository.GetByIdAsync(request.Id)
+            ?? throw new NotFoundException(nameof(Product), request.Id.ToString());
 
         mapper.Map(request, product);
 
         await productRepository.SaveChangesAsync();
-        return true;
     }
 }

@@ -1,9 +1,6 @@
 using System.Reflection;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using ShopManagementSystem.Application.Interfaces.Authentication;
-using ShopManagementSystem.Application.Interfaces.Users;
-using ShopManagementSystem.Application.Users;
 
 namespace ShopManagementSystem.Application.Extensions;
 
@@ -18,9 +15,5 @@ public static class ServiceCollectionExtensions
         services.AddValidatorsFromAssembly(applicationAssembly);
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(applicationAssembly));
-
-        services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IAccountService, AccountService>();
-        services.AddScoped<ITokenService, TokenService>();
     }
 }

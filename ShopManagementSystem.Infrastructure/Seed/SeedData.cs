@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ShopManagementSystem.Domain.Entities;
 using ShopManagementSystem.Domain.Entities.Catalog;
 using ShopManagementSystem.Domain.Entities.Identity;
 
@@ -162,9 +163,8 @@ public static class SeedData
     {
         var user = new User()
         {
-            Id = Guid.Parse("f2a81c47-93d5-4e62-b718-6c04a9d35127"),
             IsActive = true,
-            Name = "a",
+            UserName = "a",
             RoleId = RoleIds.Admin,
         };
 

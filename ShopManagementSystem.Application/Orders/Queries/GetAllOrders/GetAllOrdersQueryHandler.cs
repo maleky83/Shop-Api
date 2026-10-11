@@ -7,7 +7,7 @@ using ShopManagementSystem.Domain.Repositories.Shopping;
 
 namespace ShopManagementSystem.Application.Orders.Queries.GetAllOrders;
 
-internal class GetAllOrdersQueryHandler(
+public class GetAllOrdersQueryHandler(
     IOrderRepository orderRepository,
     IMapper mapper,
     ILogger<GetAllOrdersQueryHandler> logger

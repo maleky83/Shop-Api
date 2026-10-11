@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ShopManagementSystem.Application.Carts.Commands.DeleteCart;
 
-public class DeleteCartCommand(Guid userId) : IRequest<bool>
+public class DeleteCartCommand(string userId) : IRequest
 {
-    public Guid UserId { get; } = userId;
+    public string UserId { get; } = userId;
 }

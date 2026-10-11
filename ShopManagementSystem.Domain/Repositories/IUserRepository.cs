@@ -1,14 +1,13 @@
-using ShopManagementSystem.Domain.Entities.Identity;
+using ShopManagementSystem.Domain.Entities;
 
 namespace ShopManagementSystem.Domain.Repositories;
 
 public interface IUserRepository
 {
     Task CreateAsync(User user);
-    Task DeleteAsync(Guid id);
+    Task DeleteAsync(string id);
     Task<IEnumerable<User>> GetAllAsync();
-    Task<User> GetByIdAsync(Guid id);
+    Task<User> GetByIdAsync(string id);
     Task<User> GetUserByNameAsync(string name);
-    Task RegisterAsync(User entity);
-    Task UpdateAsync(Guid id, User entity);
+    Task UpdateAsync(string id, User entity);
 }

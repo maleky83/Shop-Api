@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ShopManagementSystem.Domain.Entities;
 using ShopManagementSystem.Domain.Entities.Carts;
 using ShopManagementSystem.Domain.Entities.Catalog;
 using ShopManagementSystem.Domain.Entities.Identity;
@@ -7,7 +9,8 @@ using ShopManagementSystem.Infrastructure.Seed;
 
 namespace ShopManagementSystem.Infrastructure.Persistence;
 
-internal sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+internal class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
+    IdentityDbContext(options)
 {
     #region Product
 

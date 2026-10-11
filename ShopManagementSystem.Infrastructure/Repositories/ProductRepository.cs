@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using ShopManagementSystem.Application.Exceptions;
 using ShopManagementSystem.Domain.Entities.Catalog;
 using ShopManagementSystem.Domain.Repositories;
 using ShopManagementSystem.Infrastructure.Persistence;
@@ -10,7 +9,7 @@ internal class ProductRepository(ApplicationDbContext dbContext) : IProductRepos
 {
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
-        List<Product> products = await dbContext.Products.ToListAsync();
+        IEnumerable<Product> products = await dbContext.Products.ToListAsync();
 
         return products;
     }
@@ -35,18 +34,8 @@ internal class ProductRepository(ApplicationDbContext dbContext) : IProductRepos
 
     public async Task<Guid> CreateAsync(Product entity)
     {
-        Category? category = await dbContext
-            .Categories
-            .FirstOrDefaultAsync(c => c.Id == entity.CategoryId);
-
-        if (category is null)
-        {
-            throw new NotFoundException("not found");
-        }
-
         await dbContext.AddAsync(entity);
         await dbContext.SaveChangesAsync();
-
         return entity.Id;
     }
 }

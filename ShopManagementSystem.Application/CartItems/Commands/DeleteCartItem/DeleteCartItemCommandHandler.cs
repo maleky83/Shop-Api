@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using ShopManagementSystem.Domain.Entities.Carts;
+using ShopManagementSystem.Domain.Exceptions;
 using ShopManagementSystem.Domain.Repositories.Shopping;
 
 namespace ShopManagementSystem.Application.CartItems.Commands.DeleteCartItem;
@@ -8,20 +9,17 @@ namespace ShopManagementSystem.Application.CartItems.Commands.DeleteCartItem;
 public class DeleteCartItemCommandHandler(
     ILogger<DeleteCartItemCommandHandler> logger,
     ICartItemRepository cartItemRepository
-    ) : IRequestHandler<DeleteCartItemCommand, bool>
+    ) : IRequestHandler<DeleteCartItemCommand>
 {
-    public async Task<bool> Handle(
+    public async Task Handle(
         DeleteCartItemCommand request,
         CancellationToken cancellationToken)
     {
         logger.LogInformation("Deleting cartItem {CartItemId}", request.CartItemId);
 
-        CartItem? cartItem = await cartItemRepository.GetByIdAsync(request.CartItemId);
-
-        if (cartItem is null)
-            return false;
+        CartItem? cartItem = await cartItemRepository.GetByIdAsync(request.CartItemId)
+            ?? throw new NotFoundException(nameof(CartItem), request.CartItemId.ToString());
 
         await cartItemRepository.DeleteAsync(cartItem);
-        return true;
     }
 }

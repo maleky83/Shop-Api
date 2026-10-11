@@ -10,8 +10,8 @@ using ShopManagementSystem.Application.Products.Queries.GetProductById;
 namespace ShopManagementSystem.Api.Controllers;
 
 [ApiController]
-[Route("products")]
-public sealed class ProductsController(
+[Route("api/products")]
+public class ProductsController(
     IMediator mediator
     ) : ControllerBase
 {
@@ -23,15 +23,10 @@ public sealed class ProductsController(
         return Ok(products);
     }
 
-    [HttpGet("{id:guid}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<ProductDto>> GetProduct([FromRoute] Guid id)
     {
-        ProductDto? product = await mediator.Send(new GetProductByIdQuery(id));
-
-        if (product is null)
-        {
-            return NotFound();
-        }
+        ProductDto product = await mediator.Send(new GetProductByIdQuery(id));
 
         return Ok(product);
     }
@@ -52,22 +47,16 @@ public sealed class ProductsController(
     {
         command.Id = id;
 
-        var isUpdated = await mediator.Send(command);
+        await mediator.Send(command);
 
-        if (isUpdated)
-            return NoContent();
-
-        return NotFound();
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteProduct([FromRoute] Guid id)
     {
-        var isDeleted = await mediator.Send(new DeleteProductCommand(id));
+        await mediator.Send(new DeleteProductCommand(id));
 
-        if (isDeleted)
-            return NoContent();
-
-        return NotFound();
+        return NoContent();
     }
 }

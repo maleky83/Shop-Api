@@ -1,12 +1,14 @@
+using Microsoft.AspNetCore.Identity;
 using ShopManagementSystem.Domain.Entities.Carts;
+using ShopManagementSystem.Domain.Entities.Identity;
 
-namespace ShopManagementSystem.Domain.Entities.Identity;
+namespace ShopManagementSystem.Domain.Entities;
 
-public sealed class User
+public class User : IdentityUser
 {
-    public Guid Id { get; set; } = Guid.Empty;
+    //public Guid Id { get; set; } = Guid.Empty;
     public DateTime CreatedAt { get; set; }
-    public required string Name { get; set; }
+    //public required string Name { get; set; }
 
     public string PasswordHash { get; set; } = string.Empty;
 
