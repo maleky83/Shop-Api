@@ -7,7 +7,7 @@ Features:
 * Clean Architecure 
 * RESTful
 * Entity Framework Core with Fluent API
-* CQRS , Mediatr
+* CQRS , Mediator
 * Serilog
 * Identity User , Role
 * Authentication
