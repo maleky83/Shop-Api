@@ -1,5 +1,6 @@
 # Shop-Api
 
+Asp.NetCore 10 , Entity:
 Product, category, cart , order
 
 Features:
