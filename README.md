@@ -1,6 +1,5 @@
-# Shop-System
+# Shop-Api
 
-A shop management system 
 Product, category, cart , order
 
 Features:
@@ -10,7 +9,9 @@ Features:
 * Entity Framework Core with Fluent API
 * CQRS , Mediatr
 * Serilog
-* User JWT and ASP.NET Core Identity
+* Identity User , Role
+* Authentication
+* Authorization
 * Dependency Injection
 * Auto Mapper
 * FluentValidation
