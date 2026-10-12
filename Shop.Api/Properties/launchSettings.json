@@ -1,0 +1,16 @@
+{
+    "profiles": {
+        "http": {
+            "commandName": "Project",
+            "launchBrowser": false,
+            "launchUrl": "openapi/v1.json",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        "WSL": {
+            "commandName": "WSL2",
+            "distributionName": ""
+        }
+    }
+}

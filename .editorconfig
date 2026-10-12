@@ -33,6 +33,6 @@ csharp_style_prefer_implicit_type = true:suggestion
 dotnet_style_object_initializer = true:suggestion
 dotnet_style_collection_initializer = true:suggestion
 
-dotnet_diagnostic.IDE0008.severity = error
+dotnet_diagnostic.IDE0008.severity = suggestion
 dotnet_diagnostic.CS9113.severity = error
 dotnet_diagnostic.IDE0005.severity = error
