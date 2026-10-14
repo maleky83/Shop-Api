@@ -19,6 +19,7 @@ public static class ServiceCollectionExtensions
     public static void AddInfrastrucure(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("ApplicationDb");
+        var connectionStringHost = configuration.GetConnectionString("HostDb");
 
         services.AddDbContext<ShopDbContext>(options => options
             .UseSqlServer(connectionString)
