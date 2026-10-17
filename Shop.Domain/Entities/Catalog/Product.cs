@@ -8,7 +8,7 @@ public sealed class Product
 {
     public int Id { get; set; }
     public DateTime CreatedAt { get; set; }
-    public string Name { get; set; } = default!;
+    public string Name { get; set; } = string.Empty;
 
     public string? Description { get; set; }
 
@@ -18,19 +18,17 @@ public sealed class Product
     public string? ImageUrl { get; set; }
 
     public bool IsActive { get; set; } = true;
-    public int CategoryId { get; set; } = default!;
+    public int CategoryId { get; set; }
 
 
     #region Relations
 
     [ForeignKey(nameof(CategoryId))]
-    public Category Category { get; set; } = null!;
+    public Category Category { get; set; } = default!;
 
-    public ICollection<OrderDetail> OrderDetails { get; }
-        = new List<OrderDetail>();
+    public ICollection<OrderDetail> OrderDetails { get; set; } = [];
 
-    public ICollection<CartItem> CartItems { get; }
-        = new List<CartItem>();
+    public ICollection<CartItem> CartItems { get; set; } = [];
 
     #endregion
 }

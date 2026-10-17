@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Shop.Domain.Entities.Carts;
+using Shop.Domain.Entities.Orders;
 
 namespace Shop.Domain.Entities;
 
@@ -12,10 +13,9 @@ public class User : IdentityUser
 
     #region Relations
 
-    public Cart? Cart { get; set; }
+    public Cart Cart { get; set; } = default!;
 
-    public ICollection<Orders.Order> Orders { get; }
-        = new List<Orders.Order>();
+    public ICollection<Order> Orders { get; set; } = [];
 
     #endregion
 }
