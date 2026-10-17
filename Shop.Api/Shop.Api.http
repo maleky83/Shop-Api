@@ -35,6 +35,6 @@ Content-Type: application/json
 
 ###
 
-GET {{ShopManagementSystem.Api_HostAddress}}/products/{id:guid}
+GET {{ShopManagementSystem.Api_HostAddress}}/products/{id:int}
 
 ###

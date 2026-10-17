@@ -1,38 +1,26 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.CartItems.Commands.CreateCartItem;
 using Shop.Application.CartItems.Commands.DeleteCartItem;
 using Shop.Application.CartItems.Commands.UpdateCartItem;
+using Shop.Application.Users;
 
 namespace Shop.Api.Controllers.Shopping;
 
 [ApiController]
 [Route("api/cartItems")]
 public sealed class CartItemsController(
-    IMediator mediator
+    IMediator mediator, IUserContext userContext
     ) : ControllerBase
 {
-    private string GetUserId()
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        if (string.IsNullOrWhiteSpace(userId))
-        {
-            throw new UnauthorizedAccessException("Invalid user");
-        }
-
-        return userId;
-    }
-
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult> CreateCartItem(
         [FromBody] CreateCartItemCommand command)
     {
-        var userId = GetUserId();
+        var user = userContext.GetCurrentUser();
 
-        command.UserId = userId;
+        command.UserId = user!.Id;
 
         await mediator.Send(command);
 
@@ -42,12 +30,12 @@ public sealed class CartItemsController(
     [HttpPatch("{cartItemId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<ActionResult> UpdateCartItem(
-       [FromRoute] Guid cartItemId,
+       [FromRoute] int cartItemId,
        [FromBody] UpdateCartItemCommand command)
     {
-        var userId = GetUserId();
+        var user = userContext.GetCurrentUser();
 
-        command.UserId = userId;
+        command.UserId = user!.Id;
         command.CartItemId = cartItemId;
 
         await mediator.Send(command);
@@ -59,12 +47,12 @@ public sealed class CartItemsController(
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> DeleteCartItem(
-        [FromRoute] Guid cartItemId,
+        [FromRoute] int cartItemId,
         [FromBody] DeleteCartItemCommand command)
     {
-        var userId = GetUserId();
+        var user = userContext.GetCurrentUser();
 
-        command.UserId = userId;
+        command.UserId = user!.Id;
         command.CartItemId = cartItemId;
 
         await mediator.Send(command);

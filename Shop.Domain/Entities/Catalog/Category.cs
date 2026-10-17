@@ -2,7 +2,7 @@ namespace Shop.Domain.Entities.Catalog;
 
 public sealed class Category
 {
-    public Guid Id { get; set; } = Guid.Empty;
+    public int Id { get; set; } 
     public DateTime CreatedAt { get; set; }
     public required string Name { get; set; }
 

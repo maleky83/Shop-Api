@@ -7,7 +7,7 @@ namespace Shop.Infrastructure.Repositories.Shopping;
 
 internal class OrderRepository(ShopDbContext dbContext) : IOrderRepository
 {
-    public async Task<Guid> CreateAsync(Order entity)
+    public async Task<int> CreateAsync(Order entity)
     {
         await dbContext.Orders.AddAsync(entity);
         await dbContext.SaveChangesAsync();
@@ -23,7 +23,7 @@ internal class OrderRepository(ShopDbContext dbContext) : IOrderRepository
         return orders;
     }
 
-    public async Task<Order?> GetByIdAsync(string userId, Guid orderId)
+    public async Task<Order?> GetByIdAsync(string userId, int orderId)
     {
         Order? order = await dbContext.Orders
             .Include(o => o.OrderDetails)

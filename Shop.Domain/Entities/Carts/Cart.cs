@@ -2,7 +2,7 @@ namespace Shop.Domain.Entities.Carts;
 
 public sealed class Cart
 {
-    public Guid Id { get; set; } = Guid.Empty;
+    public int Id { get; set; }
     public DateTime CreatedAt { get; set; }
     public string UserId { get; set; } = default!;
 

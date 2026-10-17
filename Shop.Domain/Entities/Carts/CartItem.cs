@@ -4,13 +4,13 @@ namespace Shop.Domain.Entities.Carts;
 
 public class CartItem
 {
-    public Guid Id { get; set; } = default!;
+    public int Id { get; set; } = default!;
     public DateTime CreatedAt { get; set; }
-    public Guid CartId { get; set; } = default!;
+    public int CartId { get; set; } = default!;
 
     public Cart Cart { get; set; } = null!;
 
-    public Guid ProductId { get; set; } = default!;
+    public int ProductId { get; set; } = default!;
 
     public Product Product { get; set; } = null!;
 

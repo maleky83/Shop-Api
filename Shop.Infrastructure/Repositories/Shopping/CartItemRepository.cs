@@ -7,7 +7,7 @@ namespace Shop.Infrastructure.Repositories.Shopping;
 
 internal class CartItemRepository(ShopDbContext dbContext) : ICartItemRepository
 {
-    public async Task<IEnumerable<CartItem>> GetAllByCartIdAsync(Guid cartId)
+    public async Task<IEnumerable<CartItem>> GetAllByCartIdAsync(int cartId)
     {
         List<CartItem> cartItems = await dbContext
             .CartItems
@@ -17,7 +17,7 @@ internal class CartItemRepository(ShopDbContext dbContext) : ICartItemRepository
         return cartItems;
     }
 
-    public async Task<CartItem?> GetByIdAsync(Guid cartItemId)
+    public async Task<CartItem?> GetByIdAsync(int cartItemId)
     {
         CartItem? cartItem = await dbContext
             .CartItems

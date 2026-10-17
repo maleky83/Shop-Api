@@ -6,7 +6,7 @@ namespace Shop.Domain.Entities.Catalog;
 
 public sealed class Product
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public DateTime CreatedAt { get; set; }
     public string Name { get; set; } = default!;
 
@@ -15,9 +15,10 @@ public sealed class Product
     public decimal Price { get; set; }
 
     public int Quantity { get; set; }
+    public string? ImageUrl { get; set; }
 
     public bool IsActive { get; set; } = true;
-    public Guid CategoryId { get; set; } = default!;
+    public int CategoryId { get; set; } = default!;
 
 
     #region Relations

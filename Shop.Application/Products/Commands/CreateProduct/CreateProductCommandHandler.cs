@@ -14,9 +14,9 @@ public class CreateProductCommandHandler(
     IProductRepository productRepository,
     ICategoryRepository categoryRepository,
     IValidator<CreateProductCommand> validator
-    ) : IRequestHandler<CreateProductCommand, Guid>
+    ) : IRequestHandler<CreateProductCommand, int>
 {
-    public async Task<Guid> Handle(
+    public async Task<int> Handle(
         CreateProductCommand request,
         CancellationToken cancellationToken)
     {

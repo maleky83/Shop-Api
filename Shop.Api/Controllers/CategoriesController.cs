@@ -19,7 +19,7 @@ public class CategoriesController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<CategoryDto>> GetCategory([FromRoute] Guid id)
+    public async Task<ActionResult<CategoryDto>> GetCategory([FromRoute] int id)
     {
         CategoryDto category = await mediator.Send(new GetCategoryByIdQuery(id));
 

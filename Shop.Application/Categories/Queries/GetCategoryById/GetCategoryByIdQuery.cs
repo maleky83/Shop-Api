@@ -3,7 +3,7 @@ using Shop.Application.Categories.Dtos;
 
 namespace Shop.Application.Categories.Queries.GetCategoryById;
 
-public class GetCategoryByIdQuery(Guid id) : IRequest<CategoryDto>
+public class GetCategoryByIdQuery(int id) : IRequest<CategoryDto>
 {
-    public Guid Id { get; } = id;
+    public int Id { get; } = id;
 }

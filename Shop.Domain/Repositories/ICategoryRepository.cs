@@ -5,5 +5,5 @@ namespace Shop.Domain.Repositories;
 public interface ICategoryRepository
 {
     Task<IEnumerable<Category>> GetAllAsync();
-    Task<Category?> GetByIdAsync(Guid id);
+    Task<Category?> GetByIdAsync(int id);
 }

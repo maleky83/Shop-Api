@@ -24,7 +24,7 @@ public class ProductsController(
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ProductDto>> GetProduct([FromRoute] Guid id)
+    public async Task<ActionResult<ProductDto>> GetProduct([FromRoute] int id)
     {
         ProductDto product = await mediator.Send(new GetProductByIdQuery(id));
 
@@ -35,14 +35,14 @@ public class ProductsController(
     public async Task<ActionResult<ProductDto>> CreateProduct(
        CreateProductCommand command)
     {
-        Guid productId = await mediator.Send(command);
+        int productId = await mediator.Send(command);
 
         return CreatedAtAction(nameof(GetProduct), new { id = productId }, productId);
     }
 
     [HttpPatch("{id}")]
     public async Task<ActionResult> UpdateProduct(
-        [FromRoute] Guid id,
+        [FromRoute] int id,
         [FromBody] UpdateProductCommand command)
     {
         command.Id = id;
@@ -53,7 +53,7 @@ public class ProductsController(
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteProduct([FromRoute] Guid id)
+    public async Task<ActionResult> DeleteProduct([FromRoute] int id)
     {
         await mediator.Send(new DeleteProductCommand(id));
 

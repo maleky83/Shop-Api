@@ -9,7 +9,7 @@ public sealed record OrdersCollectionDto
 
 public record OrderDto
 {
-    public required Guid OrderId { get; init; }
+    public required int OrderId { get; init; }
     public required string UserId { get; init; }
     public decimal TotalPrice { get; init; }
     public OrderStatus OrderStatus { get; init; }

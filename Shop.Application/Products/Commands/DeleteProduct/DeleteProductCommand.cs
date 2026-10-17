@@ -2,7 +2,7 @@ using MediatR;
 
 namespace Shop.Application.Products.Commands.DeleteProduct;
 
-public class DeleteProductCommand(Guid id) : IRequest
+public class DeleteProductCommand(int id) : IRequest
 {
-    public Guid Id { get; } = id;
+    public int Id { get; } = id;
 }

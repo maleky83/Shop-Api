@@ -2,7 +2,7 @@ using MediatR;
 
 namespace Shop.Application.Products.Commands.CreateProduct;
 
-public class CreateProductCommand : IRequest<Guid>
+public class CreateProductCommand : IRequest<int>
 {
     public string Name { get; set; } = default!;
 
@@ -14,5 +14,5 @@ public class CreateProductCommand : IRequest<Guid>
 
     public bool IsActive { get; set; } = true;
 
-    public Guid CategoryId { get; set; } = default!;
+    public int CategoryId { get; set; } = default!;
 }

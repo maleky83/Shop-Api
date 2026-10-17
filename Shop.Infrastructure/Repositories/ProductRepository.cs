@@ -14,7 +14,7 @@ internal class ProductRepository(ShopDbContext dbContext) : IProductRepository
         return products;
     }
 
-    public async Task<Product?> GetByIdAsync(Guid id)
+    public async Task<Product?> GetByIdAsync(int id)
     {
         Product? product = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
 
@@ -32,7 +32,7 @@ internal class ProductRepository(ShopDbContext dbContext) : IProductRepository
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task<Guid> CreateAsync(Product entity)
+    public async Task<int> CreateAsync(Product entity)
     {
         await dbContext.AddAsync(entity);
         await dbContext.SaveChangesAsync();

@@ -14,7 +14,7 @@ internal class CategoryRepository(ShopDbContext dbContext) : ICategoryRepository
         return categories;
     }
 
-    public async Task<Category?> GetByIdAsync(Guid id)
+    public async Task<Category?> GetByIdAsync(int id)
     {
         Category? category = await dbContext
             .Categories.FirstOrDefaultAsync(c => c.Id == id);

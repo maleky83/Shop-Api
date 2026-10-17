@@ -56,7 +56,7 @@ public partial class Init : Migration
             name: "Categories",
             columns: table => new
             {
-                Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                Id = table.Column<int>(type: "uniqueidentifier", nullable: false),
                 CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                 Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                 Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -177,7 +177,7 @@ public partial class Init : Migration
             name: "Carts",
             columns: table => new
             {
-                Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                Id = table.Column<int>(type: "uniqueidentifier", nullable: false),
                 CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                 UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
             },
@@ -196,7 +196,7 @@ public partial class Init : Migration
             name: "Orders",
             columns: table => new
             {
-                Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                Id = table.Column<int>(type: "uniqueidentifier", nullable: false),
                 CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                 UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                 Status = table.Column<int>(type: "int", nullable: false),
@@ -217,14 +217,14 @@ public partial class Init : Migration
             name: "Products",
             columns: table => new
             {
-                Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                Id = table.Column<int>(type: "uniqueidentifier", nullable: false),
                 CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                 Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                 Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                 Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                 Quantity = table.Column<int>(type: "int", nullable: false),
                 IsActive = table.Column<bool>(type: "bit", nullable: false),
-                CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                CategoryId = table.Column<int>(type: "uniqueidentifier", nullable: false)
             },
             constraints: table =>
             {
@@ -241,10 +241,10 @@ public partial class Init : Migration
             name: "CartItems",
             columns: table => new
             {
-                Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                Id = table.Column<int>(type: "uniqueidentifier", nullable: false),
                 CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                CartId = table.Column<int>(type: "uniqueidentifier", nullable: false),
+                ProductId = table.Column<int>(type: "uniqueidentifier", nullable: false),
                 Quantity = table.Column<int>(type: "int", nullable: false),
                 Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
             },
@@ -269,10 +269,10 @@ public partial class Init : Migration
             name: "OrderDetail",
             columns: table => new
             {
-                Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                Id = table.Column<int>(type: "uniqueidentifier", nullable: false),
                 CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                OrderId = table.Column<int>(type: "uniqueidentifier", nullable: false),
+                ProductId = table.Column<int>(type: "uniqueidentifier", nullable: false),
                 Quantity = table.Column<int>(type: "int", nullable: false),
                 UnitPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                 TotalPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)

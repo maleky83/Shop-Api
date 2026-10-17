@@ -14,9 +14,9 @@ public class CreateOrderCommandHandler(
     IValidator<CreateOrderCommand> validator,
     IOrderRepository orderRepository,
     ICartRepository cartRepository
-    ) : IRequestHandler<CreateOrderCommand, Guid>
+    ) : IRequestHandler<CreateOrderCommand, int>
 {
-    public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
 

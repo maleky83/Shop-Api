@@ -4,7 +4,7 @@ namespace Shop.Domain.Repositories.Shopping;
 
 public interface IOrderRepository
 {
-    Task<Guid> CreateAsync(Order entity);
+    Task<int> CreateAsync(Order entity);
     Task<IEnumerable<Order>> GetAllAsync(string userId);
-    Task<Order?> GetByIdAsync(string userId, Guid orderId);
+    Task<Order?> GetByIdAsync(string userId, int orderId);
 }

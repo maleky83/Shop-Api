@@ -4,13 +4,13 @@ namespace Shop.Domain.Entities.Orders;
 
 public sealed class OrderDetail
 {
-    public Guid Id { get; set; } = Guid.Empty;
+    public int Id { get; set; } 
     public DateTime CreatedAt { get; set; }
-    public Guid OrderId { get; set; } = Guid.Empty;
+    public int OrderId { get; set; } 
 
     public Order Order { get; set; } = null!;
 
-    public required Guid ProductId { get; set; }
+    public required int ProductId { get; set; }
 
     public Product Product { get; set; } = null!;
 
